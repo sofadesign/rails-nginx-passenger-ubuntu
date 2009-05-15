@@ -62,12 +62,12 @@
 #                               Consts
 #------------------------------------------------------------------------------
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/opt/nginx/sbin/nginx
+DAEMON=/usr/local/sbin/nginx
 
 PS="nginx"
 PIDNAME="nginx"				#Lets you do $PS-Master or $PS-Slave
 PIDFILE=$PIDNAME.pid                    #pid file
-PIDSPATH=/opt/nginx/logs
+PIDSPATH=/usr/local/nginx/logs
 DESCRIPTION="Nginx Server..."
 
 RUNAS=root				#user to run as
@@ -78,7 +78,7 @@ TRUE=1					#boolean
 FALSE=0					#boolean
 
 lockfile=/var/lock/subsys/nginx
-NGINX_CONF_FILE="/opt/nginx/conf/nginx.conf"
+NGINX_CONF_FILE="/usr/local/nginx/conf/nginx.conf"
 
 #------------------------------------------------------------------------------
 #                               Simple Tests
