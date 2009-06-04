@@ -49,6 +49,10 @@ Verify that hostname is set
     
     hostname
 
+Add the *deploy* user
+---------------------
+
+
 Install mysql
 ---------------
 
