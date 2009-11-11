@@ -3,10 +3,37 @@ rails-nginx-passenger-ubuntu
 
 My notes on setting up a simple production server with ubuntu, nginx, passenger and mysql for rails.
 
+Check Ubuntu Version with
+    cat /etc/issue
+
+Setup ssh public key authentification
+
+    mkdir ~/.ssh
+    touch ~/.ssh/authorized_keys
+    chmod go-rwx ~/.ssh/authorized_keys
+
+On your local machine:
+  	ssh-keygen
+
+Copy public key to remote machine:
+    cd $HOME/.ssh
+    cat identity.pub | ssh remoteuser@remotehost "cat >> .ssh/authorized_keys"
+
+Now you should be able to log in to your server without a password: 
+    ssh remoteuser@remotehost
+
 Aliases
 -------
 
-    echo "alias ll='ls -l'" >> ~/.bash_aliases
+    echo "alias ls='ls -FG'" >> ~/.bash_aliases
+	echo "alias ll='ls -l'" >> ~/.bash_aliases
+	echo "alias la='ls -a'" >> ~/.bash_aliases
+	echo "alias lll='ls -al'" >> ~/.bash_aliases
+	echo "alias psgrep='ps aux | grep'" >> ~/.bash_aliases
+	echo "alias cdw='cd $WORK_DIR'" >> ~/.bash_aliases
+	echo "alias gemi='sudo gem install --no-ri --no-rdoc'" >> ~/.bash_aliases
+	echo "alias gemu='sudo gem uninstall'" >> ~/.bash_aliases
+	echo "alias gem_search='gem search -r'" >> ~/.bash_aliases
     
 edit .bashrc and uncomment the loading of .bash_aliases
 
@@ -220,7 +247,7 @@ You may eventually want to update to the newest revisions of FFmpeg and x264 if 
 	make
 	sudo checkinstall --fstrans=no --install=yes --pkgname=ffmpeg --pkgversion "4:0.5+svn`date +%Y%m%d`" --default
 
-Installning ImageMagick and RMagick
+Installing ImageMagick and RMagick
 -----------------------------------
 
 If you want to install the latest version of ImageMagick. I used MiniMagick that shell-out to the mogrify command, worked really well for me.
@@ -265,14 +292,14 @@ Test a rails applicaton with nginx
     
 Enter your mysql password
     
-    vim database.yml
+    vim config/database.yml
     rake db:create:all
     ruby script/generate scaffold post title:string body:text
     rake db:migrate RAILS_ENV=production
     
 Check so the rails app start as normal
     
-    ruby script/server
+    ruby script/server -e production
 
     sudo vim /opt/nginx/conf/nginx.conf
     
