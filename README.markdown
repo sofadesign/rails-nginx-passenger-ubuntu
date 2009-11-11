@@ -168,6 +168,58 @@ Verify that you can start and stop nginx with init script
     
 If you want, reboot and see so the webserver is starting as it should.
 
+Installing ffmpeg
+-----------------
+
+Uninstall x264, libx264-dev, and ffmpeg if they are already installed. Open a terminal and run the following:
+
+	sudo apt-get remove ffmpeg x264 libx264-dev
+	
+Next, get all of the packages you will need to install FFmpeg and x264 (you may need to enable the universe and multiverse repositories):
+
+	sudo apt-get update
+	sudo apt-get install checkinstall yasm libfaac-dev libfaad-dev libmp3lame-dev libsdl1.2-dev libtheora-dev libx11-dev libxvidcore4-dev
+	
+Get the most current source files from the official x264 git repository, compile, and install. You can run "./configure --help" to see what features you can enable/disable.
+	
+	cd
+	git clone git://git.videolan.org/x264.git
+	cd x264
+	./configure
+	make
+	sudo checkinstall --fstrans=no --install=yes --pkgname=x264 --pkgversion "1:0.svn`date +%Y%m%d`" --default
+	
+Get the most current source files from the official FFmpeg svn, compile, and install. Run "./configure --help" to see what features you can enable/disable.
+
+	cd
+	git clone git://git.ffmpeg.org/ffmpeg/
+	cd ffmpeg
+	git clone git://git.ffmpeg.org/libswscale/
+	./configure --enable-gpl --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab
+	make
+	sudo checkinstall --fstrans=no --install=yes --pkgname=ffmpeg --pkgversion "4:0.5+svn`date +%Y%m%d`" --default
+	
+That's it for installation. You can keep the ~/x264 and ~/ffmpeg directories if you later want to update the source files to a new revision.
+
+You may eventually want to update to the newest revisions of FFmpeg and x264 if there are any major developments or changes:
+
+	sudo apt-get remove ffmpeg x264 libx264-dev
+	cd ~/x264
+	make distclean
+	git pull
+	./configure
+	make
+	sudo checkinstall --fstrans=no --install=yes --pkgname=x264 --pkgversion "1:0.svn`date +%Y%m%d`" --default
+	cd ~/ffmpeg/libswscale
+	make distclean
+	git pull
+	cd ~/ffmpeg
+	make distclean
+	git pull
+	./configure --enable-gpl --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab
+	make
+	sudo checkinstall --fstrans=no --install=yes --pkgname=ffmpeg --pkgversion "4:0.5+svn`date +%Y%m%d`" --default
+
 Installning ImageMagick and RMagick
 -----------------------------------
 
@@ -192,6 +244,8 @@ Now configure and make:
     ./configure
     make
     sudo make install
+
+	sudo checkinstall --fstrans=no --install=yes --pkgname=imagemagick --pkgversion "6:5.svn`date +%Y%m%d`" --default
 
 To avoid an error such as:
 
