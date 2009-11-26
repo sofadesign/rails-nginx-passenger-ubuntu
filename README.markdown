@@ -6,21 +6,25 @@ My notes on setting up a simple production server with ubuntu, nginx, passenger 
 Check Ubuntu Version with
     cat /etc/issue
 
-Setup ssh public key authentification
-
-    mkdir ~/.ssh
-    touch ~/.ssh/authorized_keys
-    chmod go-rwx ~/.ssh/authorized_keys
-
 On your local machine:
-  	ssh-keygen
+	ssh-keygen
 
-Copy public key to remote machine:
-    cd $HOME/.ssh
-    cat identity.pub | ssh remoteuser@remotehost "cat >> .ssh/authorized_keys"
+Copy your public key from your local computer to your slice by running the following on your LOCAL COMPUTER…
+
+	scp ~/.ssh/id_rsa.pub demo@11.222.333.444:/home/demo/
+
+Note: you will need to provide the demo user’s password that you created earlier.
+
+Now on the production server, setup the SSH permissions…
+
+	mkdir /home/demo/.ssh
+	mv /home/demo/id_rsa.pub /home/demo/.ssh/authorized_keys
+	chown -R demo:demo /home/demo/.ssh
+	chmod 700 /home/demo/.ssh
+	chmod 600 /home/demo/.ssh/authorized_keys
 
 Now you should be able to log in to your server without a password: 
-    ssh remoteuser@remotehost
+    ssh demo@11.222.333.444
 
 Aliases
 -------
