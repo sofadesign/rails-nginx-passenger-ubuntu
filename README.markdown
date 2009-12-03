@@ -209,7 +209,7 @@ Uninstall x264, libx264-dev, and ffmpeg if they are already installed. Open a te
 Next, get all of the packages you will need to install FFmpeg and x264 (you may need to enable the universe and multiverse repositories):
 
 	sudo apt-get update
-	sudo apt-get install checkinstall yasm libfaac-dev libfaad-dev libmp3lame-dev libsdl1.2-dev libtheora-dev libx11-dev libxvidcore4-dev
+	sudo apt-get install checkinstall yasm libfaac-dev libfaad-dev libmp3lame-dev libsdl1.2-dev libtheora-dev libx11-dev libxvidcore4-dev libopencore-amrnb-dev libopencore-amrwb-dev libgsm1-dev
 	
 Get the most current source files from the official x264 git repository, compile, and install. You can run "./configure --help" to see what features you can enable/disable.
 	
@@ -226,7 +226,7 @@ Get the most current source files from the official FFmpeg svn, compile, and ins
 	git clone git://git.ffmpeg.org/ffmpeg/
 	cd ffmpeg
 	git clone git://git.ffmpeg.org/libswscale/
-	./configure --enable-gpl --enable-pp --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab --enable-libamr --enable-libamr-nb --enable-libamr_wb --enable-shared
+	./configure --enable-gpl --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libgsm --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-shared --enable-version3
 	make
 	sudo checkinstall --fstrans=no --install=yes --pkgname=ffmpeg --pkgversion "4:0.5+svn`date +%Y%m%d`" --default
 	
@@ -247,7 +247,7 @@ You may eventually want to update to the newest revisions of FFmpeg and x264 if 
 	cd ~/ffmpeg
 	make distclean
 	git pull
-	./configure --enable-gpl --enable-pp --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab --enable-libamr --enable-libamr-nb --enable-libamr_wb --enable-shared
+	./configure --enable-gpl --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libgsm --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-shared --enable-version3
 	
 	make
 	sudo checkinstall --fstrans=no --install=yes --pkgname=ffmpeg --pkgversion "4:0.5+svn`date +%Y%m%d`" --default
