@@ -226,7 +226,7 @@ Get the most current source files from the official FFmpeg svn, compile, and ins
 	git clone git://git.ffmpeg.org/ffmpeg/
 	cd ffmpeg
 	git clone git://git.ffmpeg.org/libswscale/
-	./configure --enable-gpl --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab
+	./configure --enable-gpl --enable-pp --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab --enable-libamr --enable-libamr-nb --enable-libamr_wb --enable-shared
 	make
 	sudo checkinstall --fstrans=no --install=yes --pkgname=ffmpeg --pkgversion "4:0.5+svn`date +%Y%m%d`" --default
 	
@@ -247,7 +247,8 @@ You may eventually want to update to the newest revisions of FFmpeg and x264 if 
 	cd ~/ffmpeg
 	make distclean
 	git pull
-	./configure --enable-gpl --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab
+	./configure --enable-gpl --enable-pp --enable-nonfree --enable-pthreads --enable-libfaac --enable-libfaad --enable-libmp3lame --enable-libtheora --enable-libx264 --enable-libxvid --enable-x11grab --enable-libamr --enable-libamr-nb --enable-libamr_wb --enable-shared
+	
 	make
 	sudo checkinstall --fstrans=no --install=yes --pkgname=ffmpeg --pkgversion "4:0.5+svn`date +%Y%m%d`" --default
 
